@@ -2,7 +2,8 @@ const express = require('express');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex')
-
+const session = require('express-session');
+const bodyParser = require('body-parser');
 
 const db = knex({
     client: 'pg',
@@ -17,9 +18,19 @@ const db = knex({
 
 const app = express();
 
+app.use(
+    session({
+      secret: 'your-secret-key',
+      resave: false,
+      saveUninitialized: true,
+    })
+  );
+
+
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(cors());
+app.use(bodyParser.json());
 
 app.get('/products/type/:type', (req, res) => {
     const type = req.params.type;
@@ -68,23 +79,42 @@ app.get('/products/:id', (req, res) => {
         });
 });
 
-app.post('/login', (req, res) => {
-    db.select('email', 'hash').from('login')
-    .where('email', '=', req.body.email)
-    .then(data => {
-        const isValid = bcrypt.compareSync(req.body.password, data[0].hash);
-        if (isValid) {
-            return db.select('*').from('users')
-            .where('email', '=', req.body.email)
-            .then(user => {
-                console.log(isValid)
-                res.json(user[0])
-            })
-            .catch(err => res.status(400).json('unable to get user'))
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+  
+    try {
+      // Check if the email exists in the 'login' table
+      const loginData = await db.select('email', 'hash').from('login').where('email', '=', email);
+  
+      if (loginData.length === 0) {
+        throw new Error('Invalid credentials');
+      }
+  
+      // Compare the entered password with the stored hash
+      const isValid = bcrypt.compareSync(password, loginData[0].hash);
+  
+      if (isValid) {
+        // If the password is valid, retrieve the user from the 'users' table
+        const userData = await db.select('*').from('users').where('email', '=', email);
+  
+        if (userData.length === 0) {
+          throw new Error('Unable to get user');
         }
-    })
-    .catch(err => res.status(400).json('wrong credentials'))
-});
+  
+        // Store the user ID in the session after successful login
+        req.session.userId = userData[0].id, userData[0].name;
+        const responseData = { userId: userData[0].id, name: userData[0].name};
+        console.log('Response Data:', responseData);
+        res.json(responseData);
+        
+      } else {
+        throw new Error('Invalid credentials');
+      }
+    } catch (error) {
+      console.error(error.message);
+      res.status(401).json({ error: 'Invalid credentials' });
+    }
+  });
 
 app.post('/register', (req, res) => {
     const { email, name, password } = req.body;
@@ -128,34 +158,39 @@ app.get('/profile/:id', (req,res) => {
     .catch(err => res.status(400).json('not found'))
 });
 
-app.post('/create-review', (req,res) => {
-    const { id, content } = req.body;
+app.post('/reviews', async (req, res) => {
+    const { userId, comment } = req.body;
 
-    if (!id || !content) {
-        return res.status(400).json({ error: 'User ID and content are required' });
+    try {
+        const result = await db('reviews')
+          .insert({ user_id: userId, content: comment })
+          .returning('*');
+
+          const user = await db('users').where({ id: userId }).first();
+
+        res.json({
+            content: result[0].content,
+            userName: user.name
+    });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-
-    const user = database.users.find(user => user.id === id);
-
-
-    if (!user) {
-        return res.status(404).json({ error: 'User not found' });
-    }
-
-    user.review = content;
-
-    res.status(201).json({ message: 'Review created and associated with the user', review: user.review });
 });
 
-app.get('/review/:id', (req, res) => {
-    const { id } = req.params;
-    
-    const user = database.users.find(user => user.id === id);
+app.get('/reviews/DB', async (req, res) => {
+    try {
+        const reviews = await db('reviews')
+            .select('content', 'user_id') // Select content and user_id from reviews table
+            .leftJoin('users', 'reviews.user_id', 'users.id') // Join with users table
+            .select('users.name as userName'); // Select the name column from users table with alias userName
 
-    if (user) {
-        res.json(user.review);
-    } else {
-        res.status(404).json('User not found');
+        res.json({
+            reviews,
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 });
 

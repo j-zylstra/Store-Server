@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.cjs",
+    "start": "node.js server.cjs",
     "start:dev": "nodemon server.cjs"
   },
   "keywords": [],
@@ -19,6 +19,7 @@
     "express": "^4.18.2",
     "express-session": "^1.17.3",
     "knex": "^3.0.1",
+    "node.js": "^0.0.1-security",
     "nodemon": "^3.0.1",
     "pg": "^8.11.3",
     "pg-promise": "^11.5.4"

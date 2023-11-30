@@ -5,6 +5,8 @@ const knex = require('knex')
 const session = require('express-session');
 const bodyParser = require('body-parser');
 
+var PORT = process.env.PORT;
+
 const db = knex({
     client: 'pg',
     connection: {
@@ -32,6 +34,7 @@ app.use(express.json());
 app.use(cors());
 app.use(bodyParser.json());
 
+// app.get('/', (req, res) => {res})
 app.get('/products/type/:type', (req, res) => {
     const type = req.params.type;
 

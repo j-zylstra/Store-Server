@@ -10,7 +10,7 @@ var PORT = process.env.PORT;
 const db = knex({
     client: 'pg',
     connection: {
-        host : '127.0.0.1',
+        host : 'postgresql-clean-25176',
         user : 'postgres',
         port : 5432,
         password : 'test',
@@ -31,7 +31,10 @@ app.use(
 
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
+  }));
 app.use(bodyParser.json());
 
 // app.get('/', (req, res) => {res})
@@ -198,6 +201,6 @@ app.get('/reviews/DB', async (req, res) => {
 });
 
 
-app.listen(process.env.PORT || 3000, ()=> {
-    console.log(`Server is listening on port ${process.env.PORT}`);
+app.listen(PORT || 3000, ()=> {
+    console.log(`Server is listening on port ${PORT}`);
 });

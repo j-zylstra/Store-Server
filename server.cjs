@@ -10,7 +10,7 @@ var PORT = process.env.PORT;
 const db = knex({
     client: 'pg',
     connection: {
-        host : 'postgresql-clean-25176',
+        host : '127.0.0.1',
         user : 'postgres',
         port : 5432,
         password : 'test',
@@ -37,7 +37,7 @@ app.use(cors({
   }));
 app.use(bodyParser.json());
 
-// app.get('/', (req, res) => {res})
+
 app.get('/products/type/:type', (req, res) => {
     const type = req.params.type;
 

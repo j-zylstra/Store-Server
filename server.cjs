@@ -5,7 +5,7 @@ const knex = require('knex')
 const session = require('express-session');
 const bodyParser = require('body-parser');
 
-var PORT = process.env.PORT;
+const PORT = process.env.PORT || 3001;
 
 const db = knex({
     client: 'pg',
@@ -201,6 +201,6 @@ app.get('/reviews/DB', async (req, res) => {
 });
 
 
-app.listen(PORT || 3000, ()=> {
+app.listen(PORT, ()=> {
     console.log(`Server is listening on port ${PORT}`);
 });

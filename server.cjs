@@ -10,11 +10,8 @@ const PORT = process.env.PORT || 3000;
 const db = knex({
     client: 'pg',
     connection: {
-        host : '127.0.0.1',
-        user : 'postgres',
-        port : 5432,
-        password : 'test',
-        database : 'Riff-Wired'
+        host : process.env.DATABASE_URL,
+        ssl: true,
     }
 });
 

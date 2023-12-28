@@ -5,15 +5,14 @@ const knex = require('knex')
 const session = require('cookie-session');
 const bodyParser = require('body-parser');
 
-const PORT = process.env.PORT || 3000;
 
+const PORT = process.env.PORT || 3000;
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 const db = knex({
     client: 'pg',
     connection: {
         connectionString: process.env.DATABASE_URL,
-        ssl: {
-            rejectUnauthorized: false
-        }
+        ssl: true
 }, 
 host: process.env.DATABASE_HOST,
 port: 5432,

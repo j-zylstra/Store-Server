@@ -6,7 +6,7 @@ const session = require('cookie-session');
 const bodyParser = require('body-parser');
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 const db = knex({
     client: 'pg',

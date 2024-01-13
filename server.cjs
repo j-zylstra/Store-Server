@@ -24,11 +24,6 @@ database: process.env.DATABASE_DB,});
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'C:\Users\User\Online-Store\index.html')));
-
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'C:\Users\User\Online-Store\index.html', 'index.html'));
-});
 
 app.use(
     session({

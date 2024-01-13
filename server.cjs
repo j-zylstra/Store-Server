@@ -4,6 +4,7 @@ const cors = require('cors');
 const knex = require('knex')
 const session = require('cookie-session');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 
 const PORT = process.env.PORT || 3001;
@@ -22,6 +23,12 @@ password: process.env.DATABASE_PW,
 database: process.env.DATABASE_DB,});
 
 const app = express();
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 app.use(
     session({

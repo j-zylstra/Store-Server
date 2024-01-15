@@ -6,7 +6,11 @@ const session = require('cookie-session');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-
+app.use(cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
+  }));
+  
 const PORT = process.env.PORT || 3001;
 
 const db = knex({
@@ -41,10 +45,6 @@ app.use(
 app.get('/', (req, res)=> {res.send("it is working")});
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-app.use(cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
-  }));
 app.use(bodyParser.json());
 
 

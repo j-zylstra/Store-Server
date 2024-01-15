@@ -6,11 +6,6 @@ const session = require('cookie-session');
 const bodyParser = require('body-parser');
 const path = require('path');
 
-app.use(cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
-  }));
-  
 const PORT = process.env.PORT || 3001;
 
 const db = knex({
@@ -27,6 +22,12 @@ password: process.env.DATABASE_PW,
 database: process.env.DATABASE_DB,});
 
 const app = express();
+
+
+app.use(cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
+  }));
 
 app.use(express.static(path.join(__dirname, 'Online-Store')));
 

@@ -4,7 +4,7 @@ const cors = require('cors');
 const knex = require('knex')
 const session = require('cookie-session');
 const bodyParser = require('body-parser');
-
+const path = require('path');
 
 const PORT = process.env.PORT || 3001;
 
@@ -38,6 +38,10 @@ app.use(
       saveUninitialized: true,
     })
   );
+
+  app.get('/sale.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Online-Store', 'sale.html'));
+});
 
 app.get('/', (req, res)=> {res.send("it is working")});
 app.use(express.urlencoded({extended: false}));

@@ -24,6 +24,7 @@ database: process.env.DATABASE_DB,});
 
 const app = express();
 
+app.use(express.static(path.join(__dirname, 'https://riff-wired-27891913b14e.herokuapp.com')));
 
 app.use(
     session({
@@ -32,6 +33,10 @@ app.use(
       saveUninitialized: true,
     })
   );
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'https://riff-wired-27891913b14e.herokuapp.com', 'index.html'));
+});
 
 app.get('/', (req, res)=> {res.send("it is working")});
 app.use(express.urlencoded({extended: false}));

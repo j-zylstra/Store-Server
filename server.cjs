@@ -4,7 +4,7 @@ const cors = require('cors');
 const knex = require('knex')
 const session = require('cookie-session');
 const bodyParser = require('body-parser');
-const path = require('path');
+
 
 const PORT = process.env.PORT || 3001;
 
@@ -29,7 +29,7 @@ app.use(cors({
     methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
   }));
 
-app.use(express.static(path.join(__dirname, 'Online-Store')));
+
 
 app.use(
     session({
@@ -38,10 +38,6 @@ app.use(
       saveUninitialized: true,
     })
   );
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Online-Store', 'index.html'));
-});
 
 app.get('/', (req, res)=> {res.send("it is working")});
 app.use(express.urlencoded({extended: false}));

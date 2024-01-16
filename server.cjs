@@ -40,7 +40,7 @@ app.use(
   );
 
   app.get('/sale.html', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Online-Store', 'sale.html'));
+    res.sendFile(path.join(__dirname, 'Online-Store', 'sale'));
 });
 
 app.get('/', (req, res)=> {res.send("it is working")});

@@ -34,7 +34,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(express.static(path.join(__dirname, 'riff-wired-27891913b14e.herokuapp.com')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 
@@ -216,7 +216,7 @@ app.get('/reviews/DB', async (req, res) => {
 
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'riff-wired-27891913b14e.herokuapp.com', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.listen(PORT, ()=> {

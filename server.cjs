@@ -24,6 +24,12 @@ database: process.env.DATABASE_DB,});
 const app = express();
 
 
+app.use((req, res, next) => {
+    
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+    next();
+});
+
 app.use(cors({
     origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],

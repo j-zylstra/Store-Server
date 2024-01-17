@@ -30,10 +30,10 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(express.static(path.join(__dirname, 'Online-Store')));
+app.use(express.static(path.join(__dirname, 'Riff-Wired')));
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Online-Store', 'index.html'));
+    res.sendFile(path.join(__dirname, 'Riff-Wired', 'index.html'));
 });
 
 

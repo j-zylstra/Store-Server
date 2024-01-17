@@ -34,7 +34,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'riff-wired')));
 
 
 
@@ -216,7 +216,7 @@ app.get('/reviews/DB', async (req, res) => {
 
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'riff-wired', 'index.html'));
 });
 
 app.listen(PORT, ()=> {

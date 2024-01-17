@@ -52,10 +52,6 @@ app.use(
     })
   );
 
-  app.get('/sale', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Online-Store', 'sale.html'));
-});
-
 app.get('/', (req, res)=> {res.send("it is working")});
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());

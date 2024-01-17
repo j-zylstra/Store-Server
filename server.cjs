@@ -30,6 +30,13 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(express.static(path.join(__dirname, 'Online-Store')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Online-Store', 'index.html'));
+});
+
+
 app.use(cors({
     origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],

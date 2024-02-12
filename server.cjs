@@ -46,18 +46,14 @@ app.use(
     })
   );
 
-app.get("/sale", (req,res) => {
-    res.sendFile(path.join(__dirname,"public", "index.html"));
-  })
-
 app.get('/', (req, res)=> {res.send("it is working")});
 
 app.get('/sale', (req, res) => {
-    res.sendFile(path.join(__dirname, 'sale.html'));
+    res.sendFile(path.join(__dirname, 'public', 'sale.html'));
 });
 
 app.get('/new', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.use(express.urlencoded({extended: false}));

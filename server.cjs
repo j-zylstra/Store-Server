@@ -34,9 +34,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// app.use(express.static('index.html'));
-
-
 
 app.use(
     session({
@@ -46,9 +43,14 @@ app.use(
     })
   );
 
-  app.get('/', (req, res) => {
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
   });
+
+  app.get('/sale', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+  });
+  
 
 app.get('/', (req, res)=> {res.send("it is working")});
 

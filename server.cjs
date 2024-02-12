@@ -34,7 +34,7 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 
@@ -46,11 +46,20 @@ app.use(
     })
   );
 
-app.get('/', (req, res)=> {res.send("it is working")});
-app.get('/sale', (req, res) => {
+app.get("/sale", (req,res) => {
+    res.sendFile(path.join(__dirname,"public", "index.html"));
+  })
 
+app.get('/', (req, res)=> {res.send("it is working")});
+
+app.get('/sale', (req, res) => {
     res.sendFile(path.join(__dirname, 'sale.html'));
 });
+
+app.get('/new', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(bodyParser.json());
@@ -220,7 +229,7 @@ app.get('/reviews/DB', async (req, res) => {
 
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname,'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.listen(PORT, ()=> {

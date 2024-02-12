@@ -46,10 +46,6 @@ app.use(
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
   });
-
-  app.get('/sale', (req, res) => {
-    res.sendFile(path.join(__dirname, 'sale.html'));
-  });
   
 
 app.get('/', (req, res)=> {res.send("it is working")});

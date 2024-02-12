@@ -2,7 +2,7 @@ const express = require('express');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
 const knex = require('knex')
-// const session = require('cookie-session');
+const session = require('cookie-session');
 const bodyParser = require('body-parser');
 const path = require('path');
 

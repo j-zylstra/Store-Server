@@ -52,7 +52,26 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(bodyParser.json());
 
- 
+
+app.get('/products/type/:type', (req, res) => {
+
+    const type = req.params.type;
+
+    console.log('Received request for products of type:', type);
+
+    db.select('id', 'type', 'name', 'price', 'oldprice', 'instock', 'imgsrc')
+    .from('products')
+    .where('type', '=', type)
+    .then(data => {
+            res.json(data);
+            
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            res.status(500).json({ error: 'Something went wrong' });
+        });
+});
+
 app.get('/products/:id', (req, res) => {
     const id = req.params.id;
 

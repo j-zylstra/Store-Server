@@ -35,6 +35,16 @@ app.use((req, res, next) => {
 });
 
 
+  app.post('/navigate', (req, res) => {
+    const destination = req.body.destination;
+    // Perform any additional logic based on the destination
+  
+    // Redirect to the chosen route
+    res.redirect(`/${destination}`);
+  });
+  
+
+
 app.use(
     session({
       secret: 'your-secret-key',

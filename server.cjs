@@ -36,7 +36,7 @@ app.use((req, res, next) => {
 
 
   app.post('/navigate', (req, res) => {
-    const destination = req.body.destination;
+    const destination = req.body.value;
     // Perform any additional logic based on the destination
   
     // Redirect to the chosen route

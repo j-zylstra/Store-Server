@@ -35,15 +35,6 @@ app.use((req, res, next) => {
 });
 
 
-  app.post('/navigate', (req, res) => {
-    const destination = req.body.value;
-    // Perform any additional logic based on the destination
-  
-    // Redirect to the chosen route
-    res.redirect(`/${destination}`);
-  });
-  
-
 
 app.use(
     session({
@@ -53,9 +44,9 @@ app.use(
     })
   );
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-  });
+// app.get('/', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'index.html'));
+//   });
 
 
 app.use(express.urlencoded({extended: false}));
@@ -229,9 +220,9 @@ app.get('/reviews/DB', async (req, res) => {
 });
 
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, 'index.html'));
+// });
 
 app.listen(PORT, ()=> {
     console.log(`Server is listening on port ${PORT}`);

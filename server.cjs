@@ -36,7 +36,7 @@ app.use(
     })
   );
 
- app.use(express.static(__dirname));
+ app.use(express.static(__dirname + "/src"));
 
  app.use((req, res, next) => {
     if (req.url === '/') {

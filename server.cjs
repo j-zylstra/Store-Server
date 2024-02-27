@@ -24,7 +24,7 @@ database: process.env.DATABASE_DB,});
 const app = express();
 
 app.use(cors({
-    origin: "https://riff-wired-27891913b14e.herokuapp.com",
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
   }));
 
@@ -185,7 +185,7 @@ app.get('/profile/:id', (req,res) => {
     .catch(err => res.status(400).json('not found'))
 });
 
-app.post('/reviews', async (req, res) => {
+app.post('/src/reviews', async (req, res) => {
     const { userId, comment } = req.body;
 
     try {

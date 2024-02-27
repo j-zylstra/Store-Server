@@ -36,9 +36,10 @@ app.use(
     })
   );
 
-const staticFolderPath = path.join(__dirname, "src");
-
-app.use(express.static(staticFolderPath));
+  app.get('/', function(req, res) {
+    res.sendFile('/src/index.html');
+  });
+  
 
  app.use((req, res, next) => {
     if (req.url === '/') {

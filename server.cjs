@@ -36,7 +36,9 @@ app.use(
     })
   );
 
- app.use(express.static(__dirname + "/src"));
+const staticFolderPath = path.join(__dirname, "src");
+
+app.use(express.static(staticFolderPath));
 
  app.use((req, res, next) => {
     if (req.url === '/') {
@@ -220,7 +222,8 @@ app.get('/reviews/DB', async (req, res) => {
 
 
 app.get('*', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    const indexPath = path.join(__dirname, 'src', 'index.html');
+    res.sendFile(indexPath);
 });
 
 app.listen(PORT, ()=> {

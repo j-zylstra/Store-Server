@@ -28,30 +28,6 @@ app.use(cors({
     methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
   }));
 
-app.use((req, res, next) => {
-    
-    const clientRoutes = [
-        '/', 
-        '/sale', 
-        '/reviews', 
-        '/cart', 
-        '/new', 
-        '/bass', 
-        '/classic',
-        '/accessories',
-        ];
-
-       if(clientRoutes.includes(req.url)) {
-        return next();
-       }
-       
-
-    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
-    next();
-});
-
-
-
 app.use(
     session({
       secret: 'your-secret-key',
@@ -60,9 +36,16 @@ app.use(
     })
   );
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-  });
+ app.use(express.static(__dirname));
+
+ app.use((req, res, next) => {
+    if (req.url === '/') {
+        return next();
+    }
+
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+    next();
+ })
 
 
 app.use(express.urlencoded({extended: false}));
@@ -237,7 +220,7 @@ app.get('/reviews/DB', async (req, res) => {
 
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(__dirname + '/index.html');
 });
 
 app.listen(PORT, ()=> {

@@ -37,7 +37,7 @@ app.use(
   );
 
   app.get('/', function(req, res) {
-    res.sendFile('/src/index.html');
+    res.sendFile('/index.html');
   });
   
 
@@ -185,7 +185,7 @@ app.get('/profile/:id', (req,res) => {
     .catch(err => res.status(400).json('not found'))
 });
 
-app.post('/src/reviews', async (req, res) => {
+app.post('/reviews', async (req, res) => {
     const { userId, comment } = req.body;
 
     try {

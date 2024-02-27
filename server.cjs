@@ -24,7 +24,7 @@ database: process.env.DATABASE_DB,});
 const app = express();
 
 app.use(cors({
-    origin: "*",
+    origin: "https://riff-wired-27891913b14e.herokuapp.com/",
     methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
   }));
 

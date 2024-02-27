@@ -30,6 +30,22 @@ app.use(cors({
 
 app.use((req, res, next) => {
     
+    const clientRoutes = [
+        '/', 
+        '/sale', 
+        '/reviews', 
+        '/cart', 
+        '/new', 
+        '/bass', 
+        '/classic',
+        '/accessories',
+        ];
+
+       if(clientRoutes.includes(req.url)) {
+        return next();
+       }
+       
+
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
     next();
 });
@@ -44,9 +60,9 @@ app.use(
     })
   );
 
-// app.get('/', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'index.html'));
-//   });
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+  });
 
 
 app.use(express.urlencoded({extended: false}));
@@ -220,9 +236,9 @@ app.get('/reviews/DB', async (req, res) => {
 });
 
 
-// app.get('*', (req, res) => {
-//     res.sendFile(path.join(__dirname, 'index.html'));
-// });
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 app.listen(PORT, ()=> {
     console.log(`Server is listening on port ${PORT}`);

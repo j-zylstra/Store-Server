@@ -37,9 +37,8 @@ app.use(
     })
   );
 
-  app.get('/', function(req, res) {
-    res.sendFile('/index.html');
-  });
+app.use(express.static(__dirname));
+
   
 
  app.use((req, res, next) => {
@@ -222,9 +221,8 @@ app.get('/reviews/DB', async (req, res) => {
     }
 });
 
-
 app.get('*', (req, res) => {
-    const indexPath = path.join(__dirname, 'src', 'index.html');
+    const indexPath = path.join(__dirname, 'index.html');
     res.sendFile(indexPath);
 });
 

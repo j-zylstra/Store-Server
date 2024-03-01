@@ -23,6 +23,8 @@ database: process.env.DATABASE_DB,});
 
 const app = express();
 
+app.use(express.static(path.join(__dirname)));
+
 app.use(cors({
     origin: "https://riff-wired-27891913b14e.herokuapp.com",
     methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
@@ -37,9 +39,6 @@ app.use(
     })
   );
 
-  app.use(express.static(path.join(__dirname)));
-
-  
 
  app.use((req, res, next) => {
     if (req.url === '/') {
@@ -220,6 +219,7 @@ app.get('/reviews/DB', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
   });

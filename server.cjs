@@ -37,7 +37,7 @@ app.use(
     })
   );
 
-app.use(express.static(__dirname));
+  app.use(express.static(path.join(__dirname)));
 
   
 
@@ -220,11 +220,10 @@ app.get('/reviews/DB', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
 app.get('*', (req, res) => {
-    const indexPath = path.join(__dirname, 'index.html');
-    res.sendFile(indexPath);
-});
+    res.sendFile(path.join(__dirname, 'index.html'));
+  });
+  
 
 app.listen(PORT, ()=> {
     console.log(`Server is listening on port ${PORT}`);

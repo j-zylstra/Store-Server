@@ -227,7 +227,7 @@ app.get('/reviews/DB', async (req, res) => {
 
 app.get('*', (req, res) => {
     console.log('Serving index.html for unmatched route');
-    res.sendFile(path.join(__dirname, 'Online-Store', 'index.html'));
+    res.sendFile(path.join(__dirname, 'Online-Store'));
   });
 
 app.listen(PORT, ()=> {

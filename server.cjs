@@ -43,9 +43,8 @@ app.use(
 
 
  app.use((req, res, next) => {
-    if (req.url === '/') {
-        return next();
-    }
+    console.log('Received request:', req.url);
+    next();
 
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
     next();
@@ -223,6 +222,7 @@ app.get('/reviews/DB', async (req, res) => {
 });
 
 app.get('*', (req, res) => {
+    console.log('Serving index.html for unmatched route');
     res.sendFile(path.join(__dirname, 'Online-Store', 'index.html'));
   });
 

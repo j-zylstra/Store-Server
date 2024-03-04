@@ -23,6 +23,8 @@ database: process.env.DATABASE_DB,});
 
 const app = express();
 
+const indexPath = 'C:\Users\User\Online-Store\index.html';
+
 app.use(express.static(path.join(__dirname)));
 
 app.use(cors({
@@ -221,7 +223,7 @@ app.get('/reviews/DB', async (req, res) => {
 });
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(indexPath);
   });
   
 

@@ -26,9 +26,13 @@ const app = express();
 
 app.use(express.static(path.join(__dirname, 'Online-Store')));
 
+const allowedOrigins = [
+    "https://riff-wired-27891913b14e.herokuapp.com", 
+    "http://localhost:3000",
+]
 
 app.use(cors({
-    origin: "https://riff-wired-27891913b14e.herokuapp.com",
+    origin: allowedOrigins,
     methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
   }));
 

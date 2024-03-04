@@ -24,7 +24,7 @@ database: process.env.DATABASE_DB,});
 const app = express();
 ;
 
-app.use(express.static(path.join(__dirname, 'Online-Store')));
+app.use(express.static(path.join(__dirname, 'index.html')));
 
 const allowedOrigins = [
     "https://riff-wired-27891913b14e.herokuapp.com", 
@@ -227,7 +227,7 @@ app.get('/reviews/DB', async (req, res) => {
 
 app.get('*', (req, res) => {
     console.log('Serving index.html for unmatched route');
-    res.sendFile(path.join(__dirname, 'Online-Store'));
+    res.sendFile(path.resolve(__dirname, 'index.html'));
   });
 
 app.listen(PORT, ()=> {

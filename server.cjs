@@ -22,13 +22,10 @@ password: process.env.DATABASE_PW,
 database: process.env.DATABASE_DB,});
 
 const app = express();
-;
 
-app.use(express.static(path.join(__dirname, 'index.html')));
 
 const allowedOrigins = [
     "https://riff-wired-27891913b14e.herokuapp.com", 
-    "http://localhost:3000",
 ]
 
 app.use(cors({
@@ -36,20 +33,21 @@ app.use(cors({
     methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
   }));
 
+  
+app.use(express.static(path.join(__dirname, 'index.html')));
+
 app.use(
     session({
       secret: process.env.SECRET_KEY,
       resave: false,
       saveUninitialized: true,
-      cookie: { secure: false }
+      cookie: { secure: true }
     })
   );
 
 
  app.use((req, res, next) => {
     console.log('Received request:', req.url);
-    next();
-
     res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
     next();
  })
@@ -227,7 +225,7 @@ app.get('/reviews/DB', async (req, res) => {
 
 app.get('*', (req, res) => {
     console.log('Serving index.html for unmatched route');
-    res.sendFile(path.resolve(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
   });
 
 app.listen(PORT, ()=> {

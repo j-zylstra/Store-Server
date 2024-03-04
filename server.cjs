@@ -24,9 +24,8 @@ database: process.env.DATABASE_DB,});
 const app = express();
 ;
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Online-Store', 'index.html'));
-  });
+app.use(express.static(path.join(__dirname, 'Online-Store')));
+
 
 app.use(cors({
     origin: "https://riff-wired-27891913b14e.herokuapp.com",
@@ -223,7 +222,9 @@ app.get('/reviews/DB', async (req, res) => {
     }
 });
 
-
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'Online-Store', 'index.html'));
+  });
 
 app.listen(PORT, ()=> {
     console.log(`Server is listening on port ${PORT}`);

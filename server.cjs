@@ -36,6 +36,10 @@ app.use(cors({
   
 app.use(express.static(path.join(__dirname, 'index.html')));
 
+app.get('/sale', (req, res) => {
+    res.sendFile(path.join(__dirname, 'sale.html'));
+  });
+
 app.use(
     session({
       secret: process.env.SECRET_KEY,

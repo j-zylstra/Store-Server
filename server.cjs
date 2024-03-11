@@ -26,6 +26,9 @@ const app = express();
 
 const allowedOrigins = [
     "https://riff-wired-27891913b14e.herokuapp.com", 
+    "https://riff-wired-27891913b14e.herokuapp.com/",
+    "https://riff-wired-27891913b14e.herokuapp.com/sale",
+    "localhost:3000",
 ]
 
 app.use(cors({
@@ -35,10 +38,6 @@ app.use(cors({
 
   
 app.use(express.static(path.join(__dirname, 'index.html')));
-
-app.get('/sale', (req, res) => {
-    res.sendFile(path.join(__dirname, 'sale.html'));
-  });
 
 app.use(
     session({

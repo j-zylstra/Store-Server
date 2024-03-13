@@ -36,7 +36,9 @@ app.use(cors({
     methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
   }));
 
-app.use(express.static(__dirname));
+const onlineStoreDirectoryPath = path.join(__dirname, 'Online-Store');
+
+app.use(express.static(onlineStoreDirectoryPath));
 
 
 app.use(

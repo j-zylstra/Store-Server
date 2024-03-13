@@ -36,7 +36,7 @@ app.use(cors({
     methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
   }));
 
-const onlineStoreDirectoryPath = path.join(__dirname, '..', 'https://riff-wired-27891913b14e.herokuapp.com/');
+const onlineStoreDirectoryPath = path.join(__dirname, '..', 'https://riff-wired-27891913b14e.herokuapp.com');
 
 app.use(express.static(onlineStoreDirectoryPath));
 

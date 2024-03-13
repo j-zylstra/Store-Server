@@ -36,7 +36,7 @@ app.use(cors({
     methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
   }));
 
-app.use(express.static("Online-Store"));
+app.use(express.static(__dirname));
 
 
 app.use(

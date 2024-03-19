@@ -36,7 +36,6 @@ app.use(cors({
     methods: ["GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS"],
   }));
 
-app.use(express.static(__dirname));
 
 
 app.use(
@@ -225,11 +224,6 @@ app.get('/reviews/DB', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-
-app.get('*', (req, res) => {
-    console.log('Serving index.html for unmatched route');
-    res.sendFile(path.join(__dirname, 'index.html'));
-  });
 
 app.listen(PORT, ()=> {
     console.log(`Server is listening on port ${PORT}`);

@@ -27,7 +27,6 @@ const app = express();
 const allowedOrigins = [
     "https://riff-wired-27891913b14e.herokuapp.com", 
     "https://riff-wired-27891913b14e.herokuapp.com/",
-    "https://riff-wired-27891913b14e.herokuapp.com/sale",
     "localhost:3000",
 ]
 

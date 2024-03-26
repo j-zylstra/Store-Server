@@ -28,6 +28,13 @@ const allowedOrigins = [
     "https://riff-wired-27891913b14e.herokuapp.com", 
     "https://riff-wired-27891913b14e.herokuapp.com/",
     "http://riff-wired-27891913b14e.herokuapp.com",
+    "http://riff-wired-27891913b14e.herokuapp.com/",
+    "http://riff-wired-27891913b14e.herokuapp.com/reviews",
+    "http://riff-wired-27891913b14e.herokuapp.com/sale",
+    "http://riff-wired-27891913b14e.herokuapp.com/classic",
+    "http://riff-wired-27891913b14e.herokuapp.com/new",
+    "http://riff-wired-27891913b14e.herokuapp.com/cart",
+    "http://riff-wired-27891913b14e.herokuapp.com/accessories",
     "localhost:3000",
 ]
 
